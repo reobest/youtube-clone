@@ -76,11 +76,17 @@ const RelatedVideos = styled.div`
    ::-webkit-scrollbar{
     width: 0px;
    }
+   @media screen and (max-width:400px) {
+    top: 600px;
+  }
 `
 const VideoName = styled.h1`
   color:#fff;
   font-size:25px;
   font-weight: 600;
+  @media screen and (max-width:400px) {
+    font-size:10px;
+  }
 `
 const LikeCount = styled.p`
     font-size:13px;
@@ -99,6 +105,10 @@ const VideoDetails = styled.h1`
   justify-content:space-between;
   align-items:center;
   width:850px;
+  @media screen and (max-width:400px) {
+    width:350px;
+    flex-direction:column;
+  }
 `
 
 const BoxContainer = styled.div`
@@ -112,6 +122,9 @@ const VideO = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  @media screen and (max-width:400px) {
+   margin:20px;
+  }
 `
 const ChannelName = styled.p`
   color: #fff;
@@ -123,6 +136,10 @@ const VideoImg = styled.img`
   height: ${props => props.channel ? "150px" : "180px"};
   width:${props => props.channel ? "150px" : "230px"};
   border-radius:${props => props.channel ? "50%" : "0px"};
+  @media screen and (max-width:400px) {
+    width:${props => props.channel ? "250px" : "330px"};
+    height: ${props => props.channel ? "200px" : "230px"};
+  }
 `
 const Title = styled.p`
   margin: 0;
@@ -137,4 +154,7 @@ const CardContent = styled.div`
   transform:${props => props.channel ? "translateY(4px)" : "translateY(-26px)"}; 
   padding: 7px;
   border-radius: 5px;
+  @media screen and (max-width:400px) {
+    width:330px;
+  }
 `

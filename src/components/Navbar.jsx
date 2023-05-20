@@ -11,7 +11,7 @@ const Navbar = () => {
     <Container>
         <Link to='/' ><Logo src={logo}/></Link>      
         <InputText onChange={handleChange} value={searchWord} placeholder="Search For Video"/>
-        <Link to={searchWord!="" ? '/search' : '/'}><SearchIcon sx={{
+        <Link to={searchWord!="" ? '/search' : '/'}><Icon sx={{
             position: "absolute",
             right: "300px",
             color: "red",
@@ -22,6 +22,11 @@ const Navbar = () => {
 }
 
 export default Navbar
+const Icon = styled(SearchIcon)`   
+    @media screen and (max-width:400px) {
+                margin-right: -280px;
+     }
+`
 const Container = styled.div`
     position:sticky;
     top:0;

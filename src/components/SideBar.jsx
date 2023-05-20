@@ -35,6 +35,9 @@ const Container = styled.div`
     border-right-width: 1px;
     border-right-color: #2e2c2c;
     z-index: 100;
+    @media screen and (max-width:400px) {
+      display:none;
+    }
 `
 const IconsContainer = styled.div`
    box-sizing: border-box;

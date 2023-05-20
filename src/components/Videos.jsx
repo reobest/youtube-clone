@@ -32,20 +32,22 @@ const Videos = () => {
       
 })
   return (
-    <>
+    <C>
     <SideBar/>
     <VideosContainer>
       <VideoName>{videoCategorie}</VideoName>
-      <>
       {youTubeVideos}
-      </>
     </VideosContainer>
-    </>
+    </C>
   )
 }
 
 export default Videos
-
+const C = styled.div`
+  height:auto;
+  width:100%
+  background-color:#000;
+`
 const VideoName = styled.h1`
    position:relative;
    color:red;
@@ -64,6 +66,9 @@ const VideosContainer = styled.div`
     height: 700px;
     overflow-x: hidden;
     background-color: #000;
+    @media screen and (max-width:400px) {
+     left:0;
+    }
 `
 const BoxContainer = styled.div`
 width:240px;
@@ -87,6 +92,10 @@ const VideoImg = styled.img`
   height: ${props => props.channel ? "150px" : "180px"};
   width:${props => props.channel ? "150px" : "230px"};
   border-radius:${props => props.channel ? "50%" : "0px"};
+  @media screen and (max-width:400px) {
+    width:${props => props.channel ? "250px" : "330px"};
+    height: ${props => props.channel ? "200px" : "230px"};
+  }
 `
 const Title = styled.p`
   margin: 0;
@@ -101,5 +110,8 @@ const CardContent = styled.div`
   transform:${props => props.channel ? "translateY(4px)" : "translateY(-26px)"}; 
   padding: 7px;
   border-radius: 5px;
+ @media screen and (max-width:400px) {
+    width:330px;
+  } 
 `
 
