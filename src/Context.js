@@ -31,7 +31,7 @@ const AppProvider = ({ children }) => {
         }if(keyWord != ""){
           let API_URL_VIDEO =  `https://youtube-v31.p.rapidapi.com/search?part=snippet&q=${ keyWord }` 
           const {data} = await axios.get(API_URL_VIDEO,options)
-          
+          console.log(data)
           setYouTube(data.items)
         }
       }
