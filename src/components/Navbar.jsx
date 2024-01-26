@@ -6,17 +6,20 @@ import SearchIcon from '@mui/icons-material/Search';
 import { Link } from 'react-router-dom';
 const Navbar = () => {
     const context = useGlobalContext()
-    const {searchWord,handleClick,handleChange} = context
+    const {searchWord,handleClick,handleChange,handleKeyPress} = context
   return (
     <Container>
-        <Link to='/' ><Logo src={logo}/></Link>      
-        <InputText onChange={handleChange} value={searchWord} placeholder="Search For Video"/>
-        <Link to={searchWord!="" ? '/search' : '/'}><Icon sx={{
+        <Link to='/' ><Logo src={logo}/></Link> 
+        <div>     
+        <InputText onChange={handleChange} value={searchWord} onKeyUp={handleKeyPress} placeholder="Search For Video"/>      
+        <Link to={searchWord!=="" ? '/search' : '/'}><Icon sx={{
             position: "absolute",
-            right: "300px",
-            color: "red",
+            right: "3px",
             bottom:"22px",
+            color: "red",
+            top: "2px",
         }}  onClick={handleClick}/></Link>
+        </div>
     </Container>
   )
 }
@@ -24,7 +27,7 @@ const Navbar = () => {
 export default Navbar
 const Icon = styled(SearchIcon)`   
     @media screen and (max-width:400px) {
-                margin-right: -280px;
+                /* margin-right: -280px; */
      }
 `
 const Container = styled.div`
@@ -37,6 +40,12 @@ const Container = styled.div`
     height: 70px;
     background-color: #000;
     z-index:119;
+    >div{
+        position: absolute;
+        left: 50%;
+        width:40%;
+        transform: translateX(-50%);
+    }
 `
 const Logo = styled.img`
     cursor: pointer;
@@ -47,11 +56,9 @@ const Logo = styled.img`
 const InputText = styled.input`
     border: none;
     height: 26px;
-    width: 300px;
-    background: rgb(255, 255, 255);
+    width: 100%;
     border-radius: 5px;
     font-size: 12px;
     padding-left: 5px;
-    margin-right: 20px;
     color:red;
 `

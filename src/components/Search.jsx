@@ -64,6 +64,16 @@ const BoxContainer = styled.div`
 width:240px;
 height:290px; 
 margin:4px;
+:hover{
+  p{
+    color:#ff1515;
+  }
+  transform: scale(1.05);
+  transition: all 0.2s ease-in-out;
+}
+@media screen and (max-width:400px) {
+    margin:20px;
+  }
 `
 const Video = styled.div`
   margin: 5px;

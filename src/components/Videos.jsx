@@ -45,7 +45,7 @@ const Videos = () => {
 export default Videos
 const C = styled.div`
   height:auto;
-  width:100%
+  width:100%;
   background-color:#000;
 `
 const VideoName = styled.h1`
@@ -54,13 +54,17 @@ const VideoName = styled.h1`
    width:100%;
    left:35px;
    font-size:35px;
+   @media screen and (max-width:400px) {
+    width: 0;
+    height: 0;
+  }
 `
 const VideosContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     position: absolute;
-    top: 90px;
+    top: 77px;
     left: 150px;
     right: 0;
     height: 700px;
@@ -73,7 +77,17 @@ const VideosContainer = styled.div`
 const BoxContainer = styled.div`
 width:240px;
 height:290px; 
-margin:4px;
+margin:5px;
+:hover{
+  p{
+    color:#ff1515;
+  }
+  transform: scale(1.05);
+  transition: all 0.2s ease-in-out;
+}
+@media screen and (max-width:400px) {
+    margin:20px;
+  }
 `
 const Video = styled.div`
   margin: 5px;
@@ -105,7 +119,7 @@ const Title = styled.p`
 const CardContent = styled.div`
   box-sizing: border-box;
   width: 230px;
-  height: 106px;
+  height: 125px;
   background-color: #1e1e1e;
   transform:${props => props.channel ? "translateY(4px)" : "translateY(-26px)"}; 
   padding: 7px;

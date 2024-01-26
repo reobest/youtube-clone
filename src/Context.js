@@ -1,4 +1,4 @@
-import React, { useState, useContext,useEffect, useRef } from 'react'
+import React, { useState, useContext,useEffect } from 'react'
 import axios from 'axios'
 const AppContext = React.createContext()
 const AppProvider = ({ children }) => {
@@ -20,18 +20,17 @@ const AppProvider = ({ children }) => {
       }
     };
     let API_URL,API_URL_VIDEO 
-    const handleChange = async (e) => {
+    const handleChange =  (e) => {
       setSearchWord(e.target.value)    
     }
       const getApi = async () => {
-        if(keyWord == "") {
+        if(keyWord === "") {
            API_URL = `https://youtube-v31.p.rapidapi.com/search?part=snippet`
            const {data} = await axios.get(API_URL,options)
           setYouTube(data.items)
-        }if(keyWord != ""){
+        }if(keyWord !== ""){
           let API_URL_VIDEO =  `https://youtube-v31.p.rapidapi.com/search?part=snippet&q=${ keyWord }` 
           const {data} = await axios.get(API_URL_VIDEO,options)
-          console.log(data)
           setYouTube(data.items)
         }
       }
@@ -51,13 +50,21 @@ const AppProvider = ({ children }) => {
           await axios.get(API_URL_VIDEO,options).then((response) => setRelatedVids(response.data.items))
         }
       }
+      const handleKeyPress = async(event) => {
+        if (event.key === 'Enter') {
+          API_URL_VIDEO =  `https://youtube-v31.p.rapidapi.com/search?part=snippet&q=${ searchWord }` 
+          const {data} = await axios.get(API_URL_VIDEO,options)     
+          setYouTube(data.items)
+          setSearchWord("")       
+        }
+      };
       const handleClick = async () => {
-        API_URL_VIDEO =  `https://youtube-v31.p.rapidapi.com/search?part=snippet&q=${ searchWord }` 
-        const {data} = await axios.get(API_URL_VIDEO,options)     
-        setYouTube(data.items)
-        setSearchWord("")
+          API_URL_VIDEO =  `https://youtube-v31.p.rapidapi.com/search?part=snippet&q=${ searchWord }` 
+          const {data} = await axios.get(API_URL_VIDEO,options)     
+          setYouTube(data.items)
+          setSearchWord("")
       }
-      console.log(searchWord)
+
       useEffect(() => {
         getApi()
       }, [keyWord])
@@ -67,7 +74,7 @@ const AppProvider = ({ children }) => {
 
         
   return (
-    <AppContext.Provider value={{youtube,keyWord,setKeyWord,channelPage,channelDetails,handleChannel,videoCategorie,setVideoCategorie,setYouTube,setSearchWord,searchWord,handleClick,handleChange,videoDetails,relatedVids}}>
+    <AppContext.Provider value={{youtube,keyWord,setKeyWord,channelPage,channelDetails,handleChannel,videoCategorie,setVideoCategorie,setYouTube,setSearchWord,searchWord,handleClick,handleChange,videoDetails,relatedVids,handleKeyPress,setRelatedVids,options,API_URL_VIDEO}}>
       {children}
     </AppContext.Provider>
   )
