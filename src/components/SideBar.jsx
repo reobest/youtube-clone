@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React  from 'react'
 import styled from 'styled-components'
 import { categories } from '../utils/constants'
 import { useGlobalContext } from '../Context'
-import { Link } from 'react-router-dom'
+import { Link  } from 'react-router-dom'
 const SideBar = () => {
   const context = useGlobalContext()
     const {setKeyWord,setVideoCategorie} = context
