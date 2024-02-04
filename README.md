@@ -12,6 +12,14 @@
 # Channel Page 
 ![Channel](https://github.com/reobest/youtube-clone/assets/88613447/172d74e4-cc70-45ee-bd60-30c1136338b5)
 
+# Core packages
+
+React Router - Routing <br/>
+Styling - Css <br/>
+Icons - React Icons <br/>
+Network calls - Axios <br/>
+Video Player - React Player <br/>
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
