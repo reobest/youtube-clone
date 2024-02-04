@@ -4,7 +4,7 @@
  Styling - Styled Components  <br />
  Icons - React Icons  <br />
  Network calls - Axios  <br />
- Video Player - React Player  <br />
+ data base = Firebase <br/>
 # Home Page 
 ![Home](https://github.com/reobest/youtube-clone/assets/88613447/1cfc0dbc-c3b0-40ff-a565-0f591223ce95)
 # Video Page 
