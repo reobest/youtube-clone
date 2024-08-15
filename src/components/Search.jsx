@@ -5,38 +5,39 @@ import { Link } from 'react-router-dom';
 import { useGlobalContext } from '../Context'
 import SideBar from './SideBar';
 const Search = () => {
-    const context = useGlobalContext()
-    const {youtube,handleChannel} = context
-    const searchVideos = youtube.map((vid,index) => {
-        const {snippet} = vid
-        const {thumbnails} = snippet
-        const {high:{url}} = thumbnails
-        return (
-          <BoxContainer key={index}>
-          {vid.id.videoId && <Link to={`/video/${vid.id.videoId}`}  onClick={() => handleChannel(vid.id)}><Video >
-          <VideoImg src={url}/>
+  const context = useGlobalContext()
+  const { youtube, handleChannel } = context
+  const filteredVideos = youtube?.filter((video) => (video.id.videoId || video.id.channelId))
+  const searchVideos = filteredVideos.map((vid, index) => {
+    const { snippet } = vid
+    const { thumbnails } = snippet
+    const { high: { url } } = thumbnails
+    return (
+      <BoxContainer key={index}>
+        {vid.id.videoId && <Link to={`/video/${vid.id.videoId}`} onClick={() => handleChannel(vid.id)}><Video >
+          <VideoImg src={url} />
           <CardContent>
-           <Title>{snippet.title}</Title>
-           <ChannelName>{snippet.channelTitle}<CheckCircleOutlineIcon style={{fontSize:"10px",marginLeft:"3px",transform:"translateY(2px)"}}/></ChannelName>
+            <Title>{snippet.title}</Title>
+            <ChannelName>{snippet.channelTitle}<CheckCircleOutlineIcon style={{ fontSize: "10px", marginLeft: "3px", transform: "translateY(2px)" }} /></ChannelName>
           </CardContent>
-     </Video></Link>}
-     {vid.id.channelId && <Link to={`/channel/${vid.id.channelId}`}  onClick={() => handleChannel(vid.id)}><Video >
-          <VideoImg src={url} channel/>
+        </Video></Link>}
+        {vid.id.channelId && <Link to={`/channel/${vid.id.channelId}`} onClick={() => handleChannel(vid.id)}><Video >
+          <VideoImg src={url} channel />
           <CardContent channel>
-           <Title>{snippet.title}</Title>
-           <ChannelName>{snippet.channelTitle}<CheckCircleOutlineIcon style={{fontSize:"10px",marginLeft:"3px",transform:"translateY(2px)"}}/></ChannelName>
+            <Title>{snippet.title}</Title>
+            <ChannelName>{snippet.channelTitle}<CheckCircleOutlineIcon style={{ fontSize: "10px", marginLeft: "3px", transform: "translateY(2px)" }} /></ChannelName>
           </CardContent>
-     </Video></Link>}
-     </BoxContainer>
-        )
-        
+        </Video></Link>}
+      </BoxContainer>
+    )
+
   })
   return (
     <>
-    <SideBar/>
-    <SearchContainer>
+      <SideBar />
+      <SearchContainer>
         {searchVideos}
-    </SearchContainer>
+      </SearchContainer>
     </>
   )
 }
@@ -68,8 +69,6 @@ margin:4px;
   p{
     color:#ff1515;
   }
-  transform: scale(1.05);
-  transition: all 0.2s ease-in-out;
 }
 @media screen and (max-width:400px) {
     margin:20px;

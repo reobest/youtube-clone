@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { useParams } from 'react-router-dom'
 import { useGlobalContext } from '../Context'
@@ -9,53 +9,53 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'
 import { useLocation } from 'react-router-dom';
 import axios from 'axios'
 const Video = () => {
-    const context = useGlobalContext()
-    const {relatedVids,videoDetails,handleChannel,setRelatedVids,options} = context
-    const {videoId} = useParams()
-    const { pathname } = useLocation();
-    const relatedVideos = relatedVids?.map((vid,index) => {
-        const {snippet} = vid
-        const {thumbnails} = snippet
-        const url = thumbnails?.high?.url || youtubeimage;
-        return (
-          <BoxContainer key={index}>
-          <Link to={`/video/${vid.id.videoId}`}  onClick={() => handleChannel(vid.id)}><VideO >
-          <VideoImg src={url}/>
+  const context = useGlobalContext()
+  const { relatedVids, videoDetails, handleChannel, setRelatedVids, options } = context
+  const { videoId } = useParams()
+  const { pathname } = useLocation();
+  const relatedVideos = relatedVids?.map((vid, index) => {
+    const { snippet } = vid
+    const { thumbnails } = snippet
+    const url = thumbnails?.high?.url || youtubeimage;
+    return (
+      <BoxContainer key={index}>
+        <Link to={`/video/${vid.id.videoId}`} onClick={() => handleChannel(vid.id)}><VideO >
+          <VideoImg src={url} />
           <CardContent>
-           <Title>{snippet.title}</Title>
-           <ChannelName>{snippet.channelTitle}<CheckCircleOutlineIcon style={{fontSize:"10px",marginLeft:"3px",transform:"translateY(2px)"}}/></ChannelName>
+            <Title>{snippet.title}</Title>
+            <ChannelName>{snippet.channelTitle}<CheckCircleOutlineIcon style={{ fontSize: "10px", marginLeft: "3px", transform: "translateY(2px)" }} /></ChannelName>
           </CardContent>
-     </VideO></Link>
-     </BoxContainer>
-        )     
+        </VideO></Link>
+      </BoxContainer>
+    )
   })
   const fetchRelatedVideos = async () => {
     try {
       const API_URL_VIDEO = `https://youtube-v31.p.rapidapi.com/search?&part=snippet&relatedToVideoId=${videoId}&type=video`
-      await axios.get(API_URL_VIDEO,options).then((response) => setRelatedVids(response.data.items))
+      await axios.get(API_URL_VIDEO, options).then((response) => setRelatedVids(response.data.items))
     } catch (error) {
-        console.error('Error fetching related videos:', error)
+      console.error('Error fetching related videos:', error)
     }
-}
-useEffect(() => {
-  fetchRelatedVideos()
-}, [])
-useEffect(() => {
-  window.scrollTo(0, 0)
-}, [pathname])
+  }
+  useEffect(() => {
+    fetchRelatedVideos()
+  }, [])
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
   return (
     <>
-    <VideoContainer>
-       <ReactPlayer url={`https://www.youtube.com/watch?v=${videoId}`} controls width="90%" height="360px"/>
-       <VideoDetails>     
-        <VideoName>{videoDetails?.snippet?.title}</VideoName>
-        <LikeCount>{videoDetails?.statistics?.likeCount || 500} likes</LikeCount>
-        <ViewCount>{videoDetails?.statistics?.viewCount} views</ViewCount>
-       </VideoDetails>
-    </VideoContainer>
-    <RelatedVideos>     
-       {relatedVideos}
-    </RelatedVideos>
+      <VideoContainer>
+        <ReactPlayer url={`https://www.youtube.com/watch?v=${videoId}`} controls width="90%" height="360px" />
+        <VideoDetails>
+          <VideoName>{videoDetails?.snippet?.title}</VideoName>
+          <LikeCount>{videoDetails?.statistics?.likeCount || 500} likes</LikeCount>
+          <ViewCount>{videoDetails?.statistics?.viewCount + " views" || "110k views"}</ViewCount>
+        </VideoDetails>
+      </VideoContainer>
+      <RelatedVideos>
+        {relatedVideos}
+      </RelatedVideos>
     </>
   )
 }
@@ -66,10 +66,6 @@ const VideoContainer = styled.div`
     flex-direction:column;
     justify-content: center;
     align-items:center;
-    position: absolute;
-    top: 70px;
-    left:0;
-    right: 0;
     overflow-x: hidden;
     background-color: #000;
     color:#fff;
@@ -82,10 +78,9 @@ const RelatedVideos = styled.div`
     color:#fff;
     display: flex;
     flex-wrap: wrap;
+    gap: 20px;
+    padding-top: 30px;
     justify-content: center;
-    position: absolute;
-    top: 550px;
-    right: 0;
     overflow-x: hidden;
     background-color: #000;
    ::-webkit-scrollbar{
@@ -142,8 +137,6 @@ margin:4px;
   p{
     color:#ff1515;
   }
-  transform: scale(1.05);
-  transition: all 0.2s ease-in-out;
 }
 @media screen and (max-width:400px) {
     margin:20px;

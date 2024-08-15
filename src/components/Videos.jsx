@@ -6,44 +6,47 @@ import { Link } from 'react-router-dom';
 import SideBar from './SideBar';
 const Videos = () => {
   const context = useGlobalContext()
-    const {youtube,handleChannel,videoCategorie} = context
-    const youTubeVideos = youtube.map((vid,index) => {
-      const {snippet} = vid
-      const {thumbnails} = snippet
-      const {high:{url}} = thumbnails
-      return (
-        <BoxContainer key={index}>
-        {vid.id.videoId && <Link to={`/video/${vid.id.videoId}`}  onClick={() => handleChannel(vid.id)}><Video >
-        <VideoImg src={url}/>
-        <CardContent>
-         <Title>{snippet.title}</Title>
-         <ChannelName>{snippet.channelTitle}<CheckCircleOutlineIcon style={{fontSize:"10px",marginLeft:"3px",transform:"translateY(2px)"}}/></ChannelName>
-        </CardContent>
-   </Video></Link>}
-   {vid.id.channelId && <Link to={`/channel/${vid.id.channelId}`}  onClick={() => handleChannel(vid.id)}><Video >
-        <VideoImg src={url} channel/>
-        <CardContent channel>
-         <Title>{snippet.title}</Title>
-         <ChannelName>{snippet.channelTitle}<CheckCircleOutlineIcon style={{fontSize:"10px",marginLeft:"3px",transform:"translateY(2px)"}}/></ChannelName>
-        </CardContent>
-   </Video></Link>}
-   </BoxContainer>
-      )
-      
-})
+  const { youtube, handleChannel, videoCategorie } = context
+  const filteredVideos = youtube?.filter((video) => (video.id.videoId || video.id.channelId))
+  const youTubeVideos = filteredVideos.map((vid, index) => {
+    const { snippet } = vid
+    const { thumbnails } = snippet
+    const { high: { url } } = thumbnails
+    
+    return (
+      <BoxContainer key={index}>
+        {vid.id.playlistId && <h1>rayan bilal</h1>}
+        {vid.id.videoId && <Link to={`/video/${vid.id.videoId}`} onClick={() => handleChannel(vid.id)}><Video >
+          <VideoImg src={url} />
+          <CardContent>
+            <Title>{snippet.title}</Title>
+            <ChannelName>{snippet.channelTitle}<CheckCircleOutlineIcon style={{ fontSize: "10px", marginLeft: "3px", transform: "translateY(2px)" }} /></ChannelName>
+          </CardContent>
+        </Video></Link>}
+        {vid.id.channelId && <Link to={`/channel/${vid.id.channelId}`} onClick={() => handleChannel(vid.id)}><Video >
+          <VideoImg src={url} channel />
+          <CardContent channel>
+            <Title>{snippet.title}</Title>
+            <ChannelName>{snippet.channelTitle}<CheckCircleOutlineIcon style={{ fontSize: "10px", marginLeft: "3px", transform: "translateY(2px)" }} /></ChannelName>
+          </CardContent>
+        </Video></Link>}
+      </BoxContainer>
+    )
+
+  })
   return (
-    <C>
-    <SideBar/>
-    <VideosContainer>
-      <VideoName>{videoCategorie}</VideoName>
-      {youTubeVideos}
-    </VideosContainer>
-    </C>
+    <Wrapper>
+      <SideBar />
+      <VideosContainer>
+        <VideoName>{videoCategorie || "Videos"}</VideoName>
+        {youTubeVideos}
+      </VideosContainer>
+    </Wrapper>
   )
 }
 
 export default Videos
-const C = styled.div`
+const Wrapper = styled.div`
   height:auto;
   width:100%;
   background-color:#000;
@@ -62,6 +65,7 @@ const VideoName = styled.h1`
 const VideosContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
+    gap: 20px;
     justify-content: center;
     position: absolute;
     top: 77px;
@@ -82,11 +86,10 @@ margin:5px;
   p{
     color:#ff1515;
   }
-  transform: scale(1.05);
-  transition: all 0.2s ease-in-out;
 }
 @media screen and (max-width:400px) {
     margin:20px;
+    margin-top: 90px;
   }
 `
 const Video = styled.div`

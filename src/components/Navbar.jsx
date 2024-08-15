@@ -6,29 +6,30 @@ import SearchIcon from '@mui/icons-material/Search';
 import { Link } from 'react-router-dom';
 const Navbar = () => {
     const context = useGlobalContext()
-    const {searchWord,handleClick,handleChange,handleKeyPress} = context
-  return (
-    <Container>
-        <Link to='/' ><Logo src={logo}/></Link> 
-        <div>     
-        <InputText onChange={handleChange} value={searchWord} onKeyUp={handleKeyPress} placeholder="Search For Video"/>      
-        <Link to={searchWord!=="" ? '/search' : '/'}><Icon sx={{
-            position: "absolute",
-            right: "3px",
-            bottom:"22px",
-            color: "red",
-            top: "2px",
-        }}  onClick={handleClick}/></Link>
-        </div>
-    </Container>
-  )
+    const { searchWord, handleClick, handleChange, handleKeyPress } = context
+    return (
+        <Container>
+            <Link to='/' ><Logo src={logo} /></Link>
+            <Wrrapper>
+                <InputText onChange={handleChange} value={searchWord} onKeyUp={handleKeyPress} placeholder="Search For Video" />
+                <Link to={searchWord !== "" ? '/search' : '/'} style={{display:"flex"}}><Icon  onClick={handleClick} /></Link>
+            </Wrrapper>
+        </Container>
+    )
 }
 
 export default Navbar
-const Icon = styled(SearchIcon)`   
-    @media screen and (max-width:400px) {
-                /* margin-right: -280px; */
-     }
+const Icon = styled(SearchIcon)` 
+color :red ;
+`
+const Wrrapper = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 300px;
+    padding-inline: 10px;
+    background-color: #fff;
+    border-radius: 5px;
 `
 const Container = styled.div`
     position:sticky;
@@ -55,9 +56,9 @@ const Logo = styled.img`
 `
 const InputText = styled.input`
     border: none;
+    outline:none;
     height: 26px;
     width: 100%;
-    border-radius: 5px;
     font-size: 12px;
     padding-left: 5px;
     color:red;
